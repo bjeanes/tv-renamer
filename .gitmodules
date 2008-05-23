@@ -1,0 +1,3 @@
+[submodule "lib/tvdb"]
+	path = lib/tvdb
+	url = git://github.com/maddox/tvdb.git
