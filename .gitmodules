@@ -1,3 +1,6 @@
 [submodule "lib/tvdb"]
 	path = lib/tvdb
 	url = git://github.com/maddox/tvdb.git
+[submodule "lib/imdb"]
+	path = lib/imdb
+	url = git@github.com:bjeanes/tvdb.git
