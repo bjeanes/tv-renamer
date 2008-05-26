@@ -27,7 +27,7 @@ class TestTVParser < Test::Unit::TestCase
   end
   
   def test_parses_filename_normal_with_x
-    p = TVParser.parse("My Name Is Earl - 3x04")
+    p = TVParser.parse("My Name Is Earl - 3x04.avi")
     assert_equal("My Name Is Earl", p.shift)
     assert_equal(3, p.shift)
     assert_equal(4, p.shift)
