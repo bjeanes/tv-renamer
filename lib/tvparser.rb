@@ -5,8 +5,9 @@ module TVParser
     # My_Name_Is_Earl.3x17.No_Heads_And_A_Duffel_Bag.HDTV_XviD-FoV.[VTV].avi
     # My Name Is Earl - 3x04.avi
     # MythBusters - S04E01 - Newspaper Crossbow.avi
+    # my.name.is.earl.305.hdtv-lol.[VTV].avi
     
-    re = /^(.*?)(?:\s?[-\.]\s?)?[Ss]?(\d+)[EeXx](?:(\d+)(?:\s?-\s?[EeXx]?(\d+))?).*$/
+    re = /^(.*?)(?:\s?[-\.]\s?)?[Ss]?(\d{1,2})[EeXx]?(?:(\d{2})(?:\s?-\s?[EeXx]?(\d{2}))?).*$/
     
     if match = filename.to_s.match(re)
       series  = match[1].gsub(/[\._]/, ' ').strip.gsub(/\b\w/){$&.upcase}
