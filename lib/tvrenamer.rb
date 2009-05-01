@@ -9,24 +9,28 @@ class Renamer
   end
   
   def start
-    if File.directory? @path      
-      puts "Processing directory: " + @path
-      puts ""
-      Dir.chdir(@path)
-      process_directory
-    else
-      Dir.chdir(File.dirname(@path))
-      process_file(File.basename(@path))
-    end
+    process
   end
   
   private
+  def process(path=@path)
+    if File.directory? path      
+      puts "Processing directory: " + path
+      puts ""
+      Dir.chdir(path) { process_cwd }
+    else
+      Dir.chdir(File.dirname(path)) do
+        process_file(File.basename(path))
+      end
+    end
+  end
+  
   def process_file(file)
     series, season, number = *TVParser.parse(file)
     
     episode = get_episode(series, season, number)
     
-    unless episode.nil?
+    unless episode.nil? || episode.season_number == 0
       new_name = "#{series} - #{episode.season_number.to_s.rjust(2,'0')}x#{episode.number.to_s.rjust(2,'0')}"
       new_name += " - #{episode.name}" unless episode.name.nil? or episode.name.empty?
       new_name = new_name.strip + "." + file.split('.').last
@@ -38,9 +42,15 @@ class Renamer
     end
   end
   
-  def process_directory(recursive = false)
+  def process_cwd
     Dir.entries('.').each do |entry|
-      process_file(entry) if VALID_VIDEO_TYPES.include? entry.split('.').last
+      unless entry =~ /^\./
+        if File.directory?(entry)
+          process(File.expand_path(File.join(Dir.pwd, entry)))
+        else
+          process_file(entry) if VALID_VIDEO_TYPES.include? entry.split('.').last
+        end
+      end
     end
   end
   
