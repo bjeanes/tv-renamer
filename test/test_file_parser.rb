@@ -11,6 +11,12 @@ class TestTVParser < Test::Unit::TestCase
       p("House.S04E13.HDTV.XviD-XOR.avi"))
   end
   
+  def test_parses_file_name_double_episode_common_format
+    assert_equal(
+      ["X-Files", 9, 19..20], 
+      p("X-Files S09E19-20 - The Truth.avi"))
+  end
+  
   def test_parses_file_name_double_episode
     assert_equal(
       ["My Name Is Earl", 3, 7..8], 

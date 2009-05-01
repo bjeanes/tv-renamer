@@ -7,6 +7,7 @@ module TVParser
     # MythBusters - S04E01 - Newspaper Crossbow.avi
     # my.name.is.earl.305.hdtv-lol.[VTV].avi
     
+    # TODO look up the regex used in XBMC to get data from TV episodes
     re = /^(.*?)(?:\s?[-\.]\s?)?\s*\[?s?(\d{1,2})\s?[ex-]?\s?(?:(\d{2})(?:\s?-\s?[ex]?(\d{2}))?)\]?\s?.*$/i
     
     if match = filename.to_s.match(re)
