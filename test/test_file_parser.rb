@@ -60,7 +60,11 @@ class TestTVParser < Test::Unit::TestCase
       p("Arrested Development - S2 E 03 - Amigos.avi"))
   end
     
-    
+  def test_parses_file_with_dash_as_season_and_episode_separator
+    assert_equal(
+      ["The Big Bang Theory", 2, 18], 
+      p("The Big Bang Theory 02-18"))
+  end
   
   def test_doesnt_parse_invalid_filename
     assert_nil p("my home video.wmv")
