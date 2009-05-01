@@ -9,20 +9,19 @@ class Renamer
   end
   
   def start
-    puts "Processing directory: " + @path
-    puts ""
-    
-    if File.directory? @path
+    if File.directory? @path      
+      puts "Processing directory: " + @path
+      puts ""
       Dir.chdir(@path)
       process_directory
     else
       Dir.chdir(File.dirname(@path))
-      process_file
+      process_file(File.basename(@path))
     end
   end
   
   private
-  def process_file(file=@path)
+  def process_file(file)
     series, season, number = *TVParser.parse(file)
     
     episode = get_episode(series, season, number)
