@@ -64,5 +64,7 @@ class Renamer
       @series ||= {}
       @series[name] = series
     end
+    
+    @series[name]
   end
 end
