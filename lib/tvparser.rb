@@ -7,7 +7,7 @@ module TVParser
     # MythBusters - S04E01 - Newspaper Crossbow.avi
     # my.name.is.earl.305.hdtv-lol.[VTV].avi
     
-    re = /^(.*?)(?:\s?[-\.]\s?)?s?(\d{1,2})[ex]?(?:(\d{2})(?:\s?-\s?[ex]?(\d{2}))?).*$/i
+    re = /^(.*?)(?:\s?[-\.]\s?)?\s?\[?s?(\d{1,2})[ex]?(?:(\d{2})(?:\s?-\s?[ex]?(\d{2}))?)\]?\s?.*$/i
     
     if match = filename.to_s.match(re)
       series  = match[1].gsub(/[\._]/, ' ').strip.gsub(/\b\w/){$&.upcase}

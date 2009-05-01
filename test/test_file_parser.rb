@@ -47,6 +47,12 @@ class TestTVParser < Test::Unit::TestCase
       p("The.Simpsons.S20E10.720p.HDTV.X264-DIMENSION.mkv"))
   end
   
+  def test_parses_file_with_brackets_around_episode_identifier
+    assert_equal(
+      ["How I Met Your Mother", 3, 15], 
+      p("How I Met Your Mother [3x15] The Title.mkv"))
+  end
+  
   def test_doesnt_parse_invalid_filename
     assert_nil p("my home video.wmv")
   end
