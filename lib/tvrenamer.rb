@@ -33,9 +33,10 @@ class Renamer
       new_name += " - #{episode.name}" unless episode.name.nil? or episode.name.empty?
       new_name = new_name.strip + "." + file.split('.').last
       
-      
-      # puts " -> " + new_name
-      FileUtils.mv file, new_name
+      unless file == new_name
+        puts "   -> " + new_name
+        FileUtils.mv file, new_name
+      end
     end
   end
   
