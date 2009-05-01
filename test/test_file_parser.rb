@@ -17,6 +17,12 @@ class TestTVParser < Test::Unit::TestCase
       p("X-Files S09E19-20 - The Truth.avi"))
   end
   
+  def test_parses_file_name_double_episode_separated_by_comma_common_format
+    assert_equal(
+      ["The 4400", 3, 1..2], 
+      p("The 4400 - 3x01,02 - The New World"))
+  end
+  
   def test_parses_file_name_double_episode
     assert_equal(
       ["My Name Is Earl", 3, 7..8], 
@@ -64,6 +70,12 @@ class TestTVParser < Test::Unit::TestCase
     assert_equal(
       ["Arrested Development", 2, 3], 
       p("Arrested Development - S2 E 03 - Amigos.avi"))
+  end
+  
+  def test_parses_file_with_dot_between_season_and_episode
+    assert_equal(
+      ["Dexter", 2, 1], 
+      p("Dexter.S02.E01.avi"))
   end
     
   def test_parses_file_with_dash_as_season_and_episode_separator
