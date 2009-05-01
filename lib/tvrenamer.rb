@@ -52,7 +52,7 @@ class Renamer
         if recursive && File.directory?(entry)
           process(File.expand_path(File.join(Dir.pwd, entry)))
         else
-          process_file(entry) if VALID_VIDEO_TYPES.include? entry.split('.').last
+          process_file(entry) if VALID_VIDEO_TYPES.include? entry.split('.').last.downcase
         end
       end
     end
