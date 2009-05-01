@@ -41,6 +41,12 @@ class TestTVParser < Test::Unit::TestCase
       p("my.name.is.earl.305.hdtv-lol.[VTV].avi"))
   end
   
+  def test_parses_file_name_with_quality
+    assert_equal(
+      ["The Simpsons", 20, 10], 
+      p("The.Simpsons.S20E10.720p.HDTV.X264-DIMENSION.mkv"))
+  end
+  
   def test_doesnt_parse_invalid_filename
     assert_nil p("my home video.wmv")
   end

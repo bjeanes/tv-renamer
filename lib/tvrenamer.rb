@@ -1,6 +1,8 @@
 require 'fileutils'
 
 class Renamer
+  attr_accessor :path, :syntax
+  
   def initialize(path=".")
     @path = path
     @api = Tvdb.new
@@ -57,15 +59,9 @@ class Renamer
   
   def get_series(name)
     if not @series or @series[name].nil?    
-      series = @api.search(name)
-      if series.size == 1
-        @series ||= Hash.new
-        @series[name] = series.shift
-      else
-        return nil
-      end
+      series = @api.search(name + " ") # space at end fixes weird TvDB issue
+      @series ||= {}
+      @series[name] = series
     end
-    
-    @series[name]
   end
 end
