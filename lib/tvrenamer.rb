@@ -4,12 +4,12 @@ class Renamer
   attr_accessor :path, :syntax
   
   def initialize(path=".")
-    @path = path
+    @path = File.expand_path(path)
     @api = Tvdb.new
   end
   
   def start
-    puts "Current directory: " + Dir.pwd
+    puts "Processing directory: " + @path
     puts ""
     
     if File.directory? @path
@@ -23,7 +23,6 @@ class Renamer
   
   private
   def process_file(file=@path)
-    puts "Processing file #{file}"
     series, season, number = *TVParser.parse(file)
     
     episode = get_episode(series, season, number)
@@ -34,7 +33,7 @@ class Renamer
       new_name = new_name.strip + "." + file.split('.').last
       
       unless file == new_name
-        puts "   -> " + new_name
+        puts "#{file} -> #{new_name}"
         FileUtils.mv file, new_name
       end
     end
