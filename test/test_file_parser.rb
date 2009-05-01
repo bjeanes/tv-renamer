@@ -53,6 +53,15 @@ class TestTVParser < Test::Unit::TestCase
       p("How I Met Your Mother [3x15] The Title.mkv"))
   end
   
+  
+  def test_parses_file_with_spaces_between_season_and_episode
+    assert_equal(
+      ["Arrested Development", 2, 3], 
+      p("Arrested Development - S2 E 03 - Amigos.avi"))
+  end
+    
+    
+  
   def test_doesnt_parse_invalid_filename
     assert_nil p("my home video.wmv")
   end
