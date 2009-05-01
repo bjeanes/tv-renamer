@@ -15,6 +15,8 @@ class Renamer
   
   private
   def process(path=@path)
+    abort("Path '#{path}' does not exist") unless File.exists? path
+    
     if File.directory? path      
       puts "Processing directory: " + path
       puts ""
