@@ -66,6 +66,12 @@ class TestTVParser < Test::Unit::TestCase
       p("The Big Bang Theory 02-18"))
   end
   
+  def test_parses_file_without_a_dash_between_season_name_and_episode_identifiers
+    assert_equal(
+      ["The West Wing", 3, 22], 
+      p("The West Wing S03E22"))
+  end
+  
   def test_doesnt_parse_invalid_filename
     assert_nil p("my home video.wmv")
   end
