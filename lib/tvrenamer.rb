@@ -1,9 +1,10 @@
 require 'fileutils'
 
 class Renamer
-  attr_accessor :path, :syntax
+  attr_accessor :path, :syntax, :recursive
   
   def initialize(path=".")
+    @recursive = true
     @path = File.expand_path(path)
     @api = Tvdb.new
   end
@@ -45,7 +46,7 @@ class Renamer
   def process_cwd
     Dir.entries('.').each do |entry|
       unless entry =~ /^\./
-        if File.directory?(entry)
+        if recursive && File.directory?(entry)
           process(File.expand_path(File.join(Dir.pwd, entry)))
         else
           process_file(entry) if VALID_VIDEO_TYPES.include? entry.split('.').last
