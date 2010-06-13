@@ -90,6 +90,18 @@ class TestTVParser < Test::Unit::TestCase
       p("The West Wing S03E22"))
   end
   
+  def test_parses_file_with_year_in_name
+    assert_equal(
+      ["Doctor Who 2005", 5, 5],
+      p("doctor.who.2005.s05e05.720p.hdtv.x264-bia.mkv"))
+  end
+  
+  def test_parses_file_with_year_in_name_with_x_and_underscores
+    assert_equal(
+      ["Doctor Who 2005", 5, 1],
+      p("doctor_who_2005.5x01.the_eleventh_hour.720p_hdtv_x264-fov.mkv"))
+  end
+  
   def test_doesnt_parse_invalid_filename
     assert_nil p("my home video.wmv")
   end

@@ -8,12 +8,23 @@ module TVParser
     # my.name.is.earl.305.hdtv-lol.[VTV].avi
     
     # TODO look up the regex used in XBMC to get data from TV episodes
-    re = /^(.*?)(?:\s?[-\.]\s?)?\s*\[?s?(\d{1,2})\s?\.?\s?[ex-]?\s?(?:(\d{2})(?:\s?[,-]\s?[ex]?(\d{2}))?)\]?\s?.*$/i
+    re =
+      /^(.*?)(?:\s?[-\.]\s?)?\s*\[?s?(?:
+      (?:
+        (\d{1,2})
+        \s?\.?\s?[ex-]\s?
+        (?:(\d{2})(?:\s?[,-]\s?[ex]?(\d{2}))?)
+      )
+      |
+      (?:
+        \.(\d{1})(\d{2})(?!\d)
+      )
+      )\]?\s?.*$/ix
     
     if match = filename.to_s.match(re)
       series  = match[1].gsub(/[\._]/, ' ').strip.gsub(/\b\w/){$&.upcase}
-      season  = match[2].to_i
-      episode = match[3].to_i
+      season  = (match[2] || match[5]).to_i
+      episode = (match[3] || match[6]).to_i
       episode = (episode)..(match[4].to_i) unless match[4].nil?
       
       [series, season, episode] 
