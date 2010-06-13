@@ -1,3 +1,5 @@
+$:.unshift File.dirname(__FILE__)
+
 require 'lib/tvdb/tvdb'
 require 'lib/tvparser'
 require 'lib/tvrenamer'
