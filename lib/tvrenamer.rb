@@ -35,8 +35,19 @@ class Renamer
     series = get_series(series)
     
     unless episode.nil? || episode.season_number == 0
-      new_name = "#{series.name} - #{episode.season_number.to_s.rjust(2,'0')}x#{episode.number.to_s.rjust(2,'0')}"
-      new_name += " - #{episode.name}" unless episode.name.nil? or episode.name.empty?
+
+      if self.syntax.nil?
+        self.syntax = "%S - s%0se%0e - %T"
+      end
+
+      new_name = self.syntax \
+        .gsub("%S",series.name) \
+        .gsub("%0s",episode.season_number.to_s.rjust(2,'0')) \
+        .gsub("%s",episode.season_number.to_s) \
+        .gsub("%0e",episode.number.to_s.rjust(2,'0')) \
+        .gsub("%e",episode.number.to_s) \
+        .gsub("%T",episode.name)
+
       new_name = new_name.strip + "." + file.split('.').last
       
       unless file == new_name
