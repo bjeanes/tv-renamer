@@ -37,7 +37,7 @@ class Renamer
     unless episode.nil? || episode.season_number == 0
 
       if self.syntax.nil?
-        self.syntax = "%S - s%0se%0e - %T"
+        self.syntax = "%S - %0sx%0e - %T"
       end
 
       new_name = self.syntax \
