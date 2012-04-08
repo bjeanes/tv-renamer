@@ -13,7 +13,7 @@ This would mean something like `my.name.is.earl.s03x01.HDTV.VTV.avi` would be re
 
 ***
 
-I was originally going to right this months ago using Hpricot to scrape epguides.com (for example: http://epguides.com/MyNameIsEarl/). However I found out about TVDB the other day and am very excited now!
+I was originally going to write this months ago using Hpricot to scrape epguides.com (for example: http://epguides.com/MyNameIsEarl/). However I found out about TVDB the other day and am very excited now!
 
 ***
 
